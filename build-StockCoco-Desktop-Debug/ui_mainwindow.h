@@ -42,8 +42,12 @@ public:
     QPushButton *btnStock;
     QTabWidget *tabFrameGeneral;
     QWidget *tabCarrito;
-    QPushButton *pushButton;
+    QVBoxLayout *verticalLayout_3;
     QLineEdit *lineEdit;
+    QTableView *tblCarrito;
+    QGroupBox *groupBox_2;
+    QPushButton *btnClearCarrito;
+    QPushButton *pushButton_2;
     QWidget *tabStock;
     QVBoxLayout *verticalLayout_2;
     QGroupBox *groupBox;
@@ -55,6 +59,15 @@ public:
     QTableView *tableView;
     QFrame *frame;
     QPushButton *btnAddCarrito;
+    QLabel *lblItem;
+    QLabel *lblValor;
+    QLabel *lblCantStock;
+    QLineEdit *edtTxtItem;
+    QLineEdit *edtTxtValor;
+    QLineEdit *edtTxtCantStock;
+    QLineEdit *edtTxtCant;
+    QLabel *lblCant;
+    QLabel *lblAviso;
     QWidget *tabEditar;
     QCheckBox *checkBox;
     QMenuBar *menubar;
@@ -111,12 +124,32 @@ public:
         tabFrameGeneral->setTabShape(QTabWidget::Rounded);
         tabCarrito = new QWidget();
         tabCarrito->setObjectName(QString::fromUtf8("tabCarrito"));
-        pushButton = new QPushButton(tabCarrito);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(50, 380, 89, 25));
+        verticalLayout_3 = new QVBoxLayout(tabCarrito);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         lineEdit = new QLineEdit(tabCarrito);
         lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
-        lineEdit->setGeometry(QRect(250, 200, 113, 25));
+
+        verticalLayout_3->addWidget(lineEdit);
+
+        tblCarrito = new QTableView(tabCarrito);
+        tblCarrito->setObjectName(QString::fromUtf8("tblCarrito"));
+        tblCarrito->setEnabled(true);
+        tblCarrito->horizontalHeader()->setStretchLastSection(true);
+
+        verticalLayout_3->addWidget(tblCarrito);
+
+        groupBox_2 = new QGroupBox(tabCarrito);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        groupBox_2->setMinimumSize(QSize(0, 76));
+        btnClearCarrito = new QPushButton(groupBox_2);
+        btnClearCarrito->setObjectName(QString::fromUtf8("btnClearCarrito"));
+        btnClearCarrito->setGeometry(QRect(640, 40, 111, 25));
+        pushButton_2 = new QPushButton(groupBox_2);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setGeometry(QRect(200, 40, 131, 25));
+
+        verticalLayout_3->addWidget(groupBox_2);
+
         tabFrameGeneral->addTab(tabCarrito, QString());
         tabStock = new QWidget();
         tabStock->setObjectName(QString::fromUtf8("tabStock"));
@@ -164,12 +197,44 @@ public:
 
         frame = new QFrame(tabStock);
         frame->setObjectName(QString::fromUtf8("frame"));
-        frame->setMinimumSize(QSize(0, 45));
+        frame->setMinimumSize(QSize(0, 83));
         frame->setFrameShape(QFrame::NoFrame);
         frame->setFrameShadow(QFrame::Raised);
         btnAddCarrito = new QPushButton(frame);
         btnAddCarrito->setObjectName(QString::fromUtf8("btnAddCarrito"));
-        btnAddCarrito->setGeometry(QRect(40, 10, 131, 25));
+        btnAddCarrito->setGeometry(QRect(600, 10, 131, 25));
+        lblItem = new QLabel(frame);
+        lblItem->setObjectName(QString::fromUtf8("lblItem"));
+        lblItem->setGeometry(QRect(139, 10, 41, 17));
+        lblValor = new QLabel(frame);
+        lblValor->setObjectName(QString::fromUtf8("lblValor"));
+        lblValor->setGeometry(QRect(319, 36, 71, 17));
+        lblCantStock = new QLabel(frame);
+        lblCantStock->setObjectName(QString::fromUtf8("lblCantStock"));
+        lblCantStock->setGeometry(QRect(50, 36, 131, 17));
+        edtTxtItem = new QLineEdit(frame);
+        edtTxtItem->setObjectName(QString::fromUtf8("edtTxtItem"));
+        edtTxtItem->setGeometry(QRect(190, 3, 331, 25));
+        edtTxtItem->setFrame(true);
+        edtTxtItem->setReadOnly(true);
+        edtTxtValor = new QLineEdit(frame);
+        edtTxtValor->setObjectName(QString::fromUtf8("edtTxtValor"));
+        edtTxtValor->setGeometry(QRect(392, 30, 129, 25));
+        edtTxtValor->setReadOnly(true);
+        edtTxtCantStock = new QLineEdit(frame);
+        edtTxtCantStock->setObjectName(QString::fromUtf8("edtTxtCantStock"));
+        edtTxtCantStock->setGeometry(QRect(190, 30, 121, 25));
+        edtTxtCantStock->setReadOnly(true);
+        edtTxtCant = new QLineEdit(frame);
+        edtTxtCant->setObjectName(QString::fromUtf8("edtTxtCant"));
+        edtTxtCant->setEnabled(false);
+        edtTxtCant->setGeometry(QRect(190, 57, 331, 25));
+        lblCant = new QLabel(frame);
+        lblCant->setObjectName(QString::fromUtf8("lblCant"));
+        lblCant->setGeometry(QRect(35, 60, 151, 20));
+        lblAviso = new QLabel(frame);
+        lblAviso->setObjectName(QString::fromUtf8("lblAviso"));
+        lblAviso->setGeometry(QRect(550, 60, 251, 17));
 
         verticalLayout_2->addWidget(frame);
 
@@ -202,12 +267,14 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Stock Pintureria de coco", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Fusion Tex  -  Plataforma De Stock", nullptr));
         btnCarrito->setText(QApplication::translate("MainWindow", "Carrito", nullptr));
         btnEditar->setText(QApplication::translate("MainWindow", "Editar / Agregar", nullptr));
         btnStock->setText(QApplication::translate("MainWindow", "Stock", nullptr));
-        pushButton->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
         lineEdit->setText(QApplication::translate("MainWindow", "ss", nullptr));
+        groupBox_2->setTitle(QApplication::translate("MainWindow", "GroupBox", nullptr));
+        btnClearCarrito->setText(QApplication::translate("MainWindow", "Vaciar carrito", nullptr));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Realizar compra", nullptr));
         tabFrameGeneral->setTabText(tabFrameGeneral->indexOf(tabCarrito), QApplication::translate("MainWindow", "Carrito", nullptr));
         groupBox->setTitle(QApplication::translate("MainWindow", "Filtro de busqueda", nullptr));
         btnUpdateTableStock->setText(QApplication::translate("MainWindow", "Buscar", nullptr));
@@ -218,6 +285,12 @@ public:
 
         btnCleanFiltro->setText(QApplication::translate("MainWindow", "Limpiar filtro", nullptr));
         btnAddCarrito->setText(QApplication::translate("MainWindow", "agregar al carrito", nullptr));
+        lblItem->setText(QApplication::translate("MainWindow", "\303\257tem :", nullptr));
+        lblValor->setText(QApplication::translate("MainWindow", "Valor [$] :", nullptr));
+        lblCantStock->setText(QApplication::translate("MainWindow", "Cantidad en stock :", nullptr));
+        edtTxtItem->setText(QString());
+        lblCant->setText(QApplication::translate("MainWindow", "Cantidad de compra :", nullptr));
+        lblAviso->setText(QString());
         tabFrameGeneral->setTabText(tabFrameGeneral->indexOf(tabStock), QApplication::translate("MainWindow", "Stock", nullptr));
         checkBox->setText(QApplication::translate("MainWindow", "CheckBox", nullptr));
         tabFrameGeneral->setTabText(tabFrameGeneral->indexOf(tabEditar), QApplication::translate("MainWindow", "Editar / Agregar", nullptr));
