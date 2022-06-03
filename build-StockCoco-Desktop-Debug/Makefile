@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../StockCoco -I. -I../../../../Qt5.12.11/5.12.11/gcc_64/include -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../StockCoco -I. -I../../../../Qt5.12.11/5.12.11/gcc_64/include -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/lucho/Qt5.12.11/5.12.11/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = StockCoco1.0.0
 DISTDIR = /home/lucho/Documentos/proyectosQt/StockCoco/build-StockCoco-Desktop-Debug/.tmp/StockCoco1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/lucho/Qt5.12.11/5.12.11/gcc_64/lib
-LIBS          = $(SUBLIBS) /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Widgets.so /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Gui.so /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Widgets.so /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Gui.so /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Sql.so /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -231,6 +231,7 @@ DIST          = ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/spec_pre.p
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/spec_post.prf \
+		../StockCoco/.qmake.stash \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/default_pre.prf \
@@ -437,6 +438,7 @@ Makefile: ../StockCoco/StockCoco.pro ../../../../Qt5.12.11/5.12.11/gcc_64/mkspec
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/default_pre.prf \
@@ -632,6 +634,7 @@ Makefile: ../StockCoco/StockCoco.pro ../../../../Qt5.12.11/5.12.11/gcc_64/mkspec
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/qt_config.prf:
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/toolchain.prf:
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/default_pre.prf:
@@ -813,7 +816,7 @@ moc_mainwindow.cpp: ../StockCoco/mainwindow.h \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qicon.h \
 		moc_predefs.h \
 		../../../../Qt5.12.11/5.12.11/gcc_64/bin/moc
-	/home/lucho/Qt5.12.11/5.12.11/gcc_64/bin/moc $(DEFINES) --include /home/lucho/Documentos/proyectosQt/StockCoco/build-StockCoco-Desktop-Debug/moc_predefs.h -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++ -I/home/lucho/Documentos/proyectosQt/StockCoco/StockCoco -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtWidgets -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtGui -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../StockCoco/mainwindow.h -o moc_mainwindow.cpp
+	/home/lucho/Qt5.12.11/5.12.11/gcc_64/bin/moc $(DEFINES) --include /home/lucho/Documentos/proyectosQt/StockCoco/build-StockCoco-Desktop-Debug/moc_predefs.h -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++ -I/home/lucho/Documentos/proyectosQt/StockCoco/StockCoco -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtWidgets -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtGui -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtSql -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../StockCoco/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1059,7 +1062,54 @@ mainwindow.o: ../StockCoco/mainwindow.cpp ../StockCoco/mainwindow.h \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qtouchdevice.h \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qicon.h \
-		ui_mainwindow.h
+		ui_mainwindow.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore/QVariant \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore/qeventloop.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QCheckBox \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qcheckbox.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qlayout.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QLineEdit \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qlineedit.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qtextformat.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qtextoption.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QMenuBar \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qmenubar.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qmenu.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qaction.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QPushButton \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QRadioButton \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qradiobutton.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QStatusBar \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QTabWidget \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QVBoxLayout \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QWidget \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/QSqlDatabase \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/qsqldatabase.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/qtsqlglobal.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/qtsql-config.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/QSqlQuery \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/qsqlquery.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/qsqlerror.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/QSqlQueryModel \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/qsqlquerymodel.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore/qabstractitemmodel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../StockCoco/mainwindow.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 

@@ -22,7 +22,9 @@ private slots:
 
     void on_btnStock_clicked();
 
-    void on_listView_indexesMoved(const QModelIndexList &indexes);
+    void on_btnUpdateTableStock_clicked();
+
+    void on_btnCleanFiltro_clicked();
 
 private:
     Ui::MainWindow *ui;

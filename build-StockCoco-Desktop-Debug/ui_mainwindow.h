@@ -12,12 +12,16 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
@@ -39,9 +43,18 @@ public:
     QTabWidget *tabFrameGeneral;
     QWidget *tabCarrito;
     QPushButton *pushButton;
-    QTableView *tableCarrito;
+    QLineEdit *lineEdit;
     QWidget *tabStock;
-    QRadioButton *radioButton;
+    QVBoxLayout *verticalLayout_2;
+    QGroupBox *groupBox;
+    QPushButton *btnUpdateTableStock;
+    QLabel *lblFiltro;
+    QComboBox *cmbFiltro;
+    QLineEdit *edtTxtFiltro;
+    QPushButton *btnCleanFiltro;
+    QTableView *tableView;
+    QFrame *frame;
+    QPushButton *btnAddCarrito;
     QWidget *tabEditar;
     QCheckBox *checkBox;
     QMenuBar *menubar;
@@ -101,16 +114,65 @@ public:
         pushButton = new QPushButton(tabCarrito);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(50, 380, 89, 25));
-        tableCarrito = new QTableView(tabCarrito);
-        tableCarrito->setObjectName(QString::fromUtf8("tableCarrito"));
-        tableCarrito->setGeometry(QRect(240, 100, 256, 192));
-        tableCarrito->setProperty("showDropIndicator", QVariant(false));
+        lineEdit = new QLineEdit(tabCarrito);
+        lineEdit->setObjectName(QString::fromUtf8("lineEdit"));
+        lineEdit->setGeometry(QRect(250, 200, 113, 25));
         tabFrameGeneral->addTab(tabCarrito, QString());
         tabStock = new QWidget();
         tabStock->setObjectName(QString::fromUtf8("tabStock"));
-        radioButton = new QRadioButton(tabStock);
-        radioButton->setObjectName(QString::fromUtf8("radioButton"));
-        radioButton->setGeometry(QRect(350, 210, 112, 23));
+        verticalLayout_2 = new QVBoxLayout(tabStock);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        groupBox = new QGroupBox(tabStock);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setMinimumSize(QSize(0, 64));
+        btnUpdateTableStock = new QPushButton(groupBox);
+        btnUpdateTableStock->setObjectName(QString::fromUtf8("btnUpdateTableStock"));
+        btnUpdateTableStock->setGeometry(QRect(590, 30, 101, 25));
+        lblFiltro = new QLabel(groupBox);
+        lblFiltro->setObjectName(QString::fromUtf8("lblFiltro"));
+        lblFiltro->setGeometry(QRect(10, 34, 81, 17));
+        cmbFiltro = new QComboBox(groupBox);
+        cmbFiltro->addItem(QString());
+        cmbFiltro->addItem(QString());
+        cmbFiltro->addItem(QString());
+        cmbFiltro->setObjectName(QString::fromUtf8("cmbFiltro"));
+        cmbFiltro->setGeometry(QRect(100, 30, 86, 25));
+        edtTxtFiltro = new QLineEdit(groupBox);
+        edtTxtFiltro->setObjectName(QString::fromUtf8("edtTxtFiltro"));
+        edtTxtFiltro->setGeometry(QRect(190, 30, 391, 25));
+        btnCleanFiltro = new QPushButton(groupBox);
+        btnCleanFiltro->setObjectName(QString::fromUtf8("btnCleanFiltro"));
+        btnCleanFiltro->setGeometry(QRect(700, 30, 101, 25));
+
+        verticalLayout_2->addWidget(groupBox);
+
+        tableView = new QTableView(tabStock);
+        tableView->setObjectName(QString::fromUtf8("tableView"));
+        tableView->setProperty("showDropIndicator", QVariant(false));
+        tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+        tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tableView->setSortingEnabled(false);
+        tableView->horizontalHeader()->setCascadingSectionResizes(false);
+        tableView->horizontalHeader()->setDefaultSectionSize(200);
+        tableView->horizontalHeader()->setHighlightSections(false);
+        tableView->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
+        tableView->horizontalHeader()->setStretchLastSection(true);
+        tableView->verticalHeader()->setVisible(false);
+        tableView->verticalHeader()->setCascadingSectionResizes(false);
+
+        verticalLayout_2->addWidget(tableView);
+
+        frame = new QFrame(tabStock);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setMinimumSize(QSize(0, 45));
+        frame->setFrameShape(QFrame::NoFrame);
+        frame->setFrameShadow(QFrame::Raised);
+        btnAddCarrito = new QPushButton(frame);
+        btnAddCarrito->setObjectName(QString::fromUtf8("btnAddCarrito"));
+        btnAddCarrito->setGeometry(QRect(40, 10, 131, 25));
+
+        verticalLayout_2->addWidget(frame);
+
         tabFrameGeneral->addTab(tabStock, QString());
         tabEditar = new QWidget();
         tabEditar->setObjectName(QString::fromUtf8("tabEditar"));
@@ -132,7 +194,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabFrameGeneral->setCurrentIndex(0);
+        tabFrameGeneral->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -145,8 +207,17 @@ public:
         btnEditar->setText(QApplication::translate("MainWindow", "Editar / Agregar", nullptr));
         btnStock->setText(QApplication::translate("MainWindow", "Stock", nullptr));
         pushButton->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
+        lineEdit->setText(QApplication::translate("MainWindow", "ss", nullptr));
         tabFrameGeneral->setTabText(tabFrameGeneral->indexOf(tabCarrito), QApplication::translate("MainWindow", "Carrito", nullptr));
-        radioButton->setText(QApplication::translate("MainWindow", "RadioButton", nullptr));
+        groupBox->setTitle(QApplication::translate("MainWindow", "Filtro de busqueda", nullptr));
+        btnUpdateTableStock->setText(QApplication::translate("MainWindow", "Buscar", nullptr));
+        lblFiltro->setText(QApplication::translate("MainWindow", "Filtrar por:", nullptr));
+        cmbFiltro->setItemText(0, QApplication::translate("MainWindow", "item", nullptr));
+        cmbFiltro->setItemText(1, QApplication::translate("MainWindow", "cantidad", nullptr));
+        cmbFiltro->setItemText(2, QApplication::translate("MainWindow", "valor", nullptr));
+
+        btnCleanFiltro->setText(QApplication::translate("MainWindow", "Limpiar filtro", nullptr));
+        btnAddCarrito->setText(QApplication::translate("MainWindow", "agregar al carrito", nullptr));
         tabFrameGeneral->setTabText(tabFrameGeneral->indexOf(tabStock), QApplication::translate("MainWindow", "Stock", nullptr));
         checkBox->setText(QApplication::translate("MainWindow", "CheckBox", nullptr));
         tabFrameGeneral->setTabText(tabFrameGeneral->indexOf(tabEditar), QApplication::translate("MainWindow", "Editar / Agregar", nullptr));
