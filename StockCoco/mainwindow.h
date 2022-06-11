@@ -39,6 +39,10 @@ private slots:
 
     void on_tabFrameGeneral_currentChanged(int index);
 
+    void on_btnAddCarrito_clicked();
+
+    void on_edtTxtCant_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
 };

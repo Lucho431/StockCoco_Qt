@@ -108,14 +108,14 @@ void MainWindow::on_tableView_activated(const QModelIndex &index)
     //qDebug() << index.row();
 
     itemSelecto.item = ui->tableView->model()->data(index.siblingAtColumn(1)).toString();
-    itemSelecto.cant = ui->tableView->model()->data(index.siblingAtColumn(2)).toInt();
+    itemSelecto.cantStock = ui->tableView->model()->data(index.siblingAtColumn(2)).toInt();
     itemSelecto.val = ui->tableView->model()->data(index.siblingAtColumn(3)).toFloat();
 
     flag_itemSelecto = 1;
     ui->edtTxtCant->setEnabled(true);
 
     ui->edtTxtItem->setText(itemSelecto.item);
-    ui->edtTxtCantStock->setText(QString::number(itemSelecto.cant));
+    ui->edtTxtCantStock->setText(QString::number(itemSelecto.cantStock));
     ui->edtTxtValor->setText(QString::number(itemSelecto.val));
 
     //qDebug() << itemSelecto.item;
@@ -139,6 +139,11 @@ void MainWindow::on_tabFrameGeneral_currentChanged(int index)
             ui->tblCarrito->resizeRowsToContents();
         break;
         case 1: //stock
+            query.exec("SELECT * FROM stock");
+
+            modal->setQuery(query);
+            ui->tableView->setModel(modal);
+            ui->tableView->resizeRowsToContents();
 
         break;
         case 2: //Editar
@@ -147,5 +152,58 @@ void MainWindow::on_tabFrameGeneral_currentChanged(int index)
         defaut:
         break;
     } //fin switch index
+}
+
+
+void MainWindow::on_btnAddCarrito_clicked()
+{
+    if (itemSelecto.cant == 0){
+        return;
+    }
+
+    QSqlQueryModel * modal=new QSqlQueryModel();
+
+    QSqlQuery query;
+
+    QString consulta = "SELECT * FROM carrito WHERE item='" + itemSelecto.item + "';";
+
+    query.exec(consulta);
+
+    if (query.value(1) != itemSelecto.item){
+        qDebug() << "no hay valor";
+        //query.exec("INSERT INTO stock(item,cantidad,valor)VALUES('pintura verde',5,850.5)");
+        //consulta = "INSERT INTO carrito(item,cantidad,valor)VALUES('";
+        //consulta += itemSelecto.item + "', " + QString::number(itemSelecto.cant) + ", " + QString::number(itemSelecto.val) + ")";
+    }else{
+        qDebug() << "ya hay valor";
+       // consulta = "UPDATE carrito SET "; //item='"+ itemSelecto.item + "', ";
+       // consulta +="cantidad='" + QString::number(itemSelecto.cant) + "', ";
+       // consulta +="valor='" + QString::number(itemSelecto.val) + "' WHERE item='" + itemSelecto.item + "';";
+    }
+
+    qDebug() << consulta;
+
+    query.exec(consulta);
+
+    modal->setQuery(query);
+    ui->tblCarrito->setModel(modal);
+    ui->tblCarrito->resizeRowsToContents();
+
+}
+
+
+void MainWindow::on_edtTxtCant_textChanged(const QString &arg1)
+{
+    //int auxCant = atoi(arg1);
+    int auxCant = arg1.toInt();
+    if (auxCant > 0 && auxCant <= itemSelecto.cantStock){
+        ui->edtTxtCant->setText(QString::number(auxCant));
+        itemSelecto.cant=auxCant;
+    }else{
+        ui->edtTxtCant->setText("0");
+        itemSelecto.cant=0;
+    }
+
+    //ui->edtTxtCant->setText()
 }
 
