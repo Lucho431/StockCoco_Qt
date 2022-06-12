@@ -45,9 +45,11 @@ public:
     QVBoxLayout *verticalLayout_3;
     QLineEdit *lineEdit;
     QTableView *tblCarrito;
-    QGroupBox *groupBox_2;
+    QGroupBox *grpResumenCarrito;
     QPushButton *btnClearCarrito;
-    QPushButton *pushButton_2;
+    QPushButton *btnComprar;
+    QLabel *label;
+    QLineEdit *edtTxtTotal;
     QWidget *tabStock;
     QVBoxLayout *verticalLayout_2;
     QGroupBox *groupBox;
@@ -134,21 +136,31 @@ public:
         tblCarrito = new QTableView(tabCarrito);
         tblCarrito->setObjectName(QString::fromUtf8("tblCarrito"));
         tblCarrito->setEnabled(true);
+        tblCarrito->setProperty("showDropIndicator", QVariant(false));
+        tblCarrito->setSelectionMode(QAbstractItemView::SingleSelection);
+        tblCarrito->setSelectionBehavior(QAbstractItemView::SelectRows);
         tblCarrito->horizontalHeader()->setStretchLastSection(true);
 
         verticalLayout_3->addWidget(tblCarrito);
 
-        groupBox_2 = new QGroupBox(tabCarrito);
-        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
-        groupBox_2->setMinimumSize(QSize(0, 76));
-        btnClearCarrito = new QPushButton(groupBox_2);
+        grpResumenCarrito = new QGroupBox(tabCarrito);
+        grpResumenCarrito->setObjectName(QString::fromUtf8("grpResumenCarrito"));
+        grpResumenCarrito->setMinimumSize(QSize(0, 76));
+        btnClearCarrito = new QPushButton(grpResumenCarrito);
         btnClearCarrito->setObjectName(QString::fromUtf8("btnClearCarrito"));
         btnClearCarrito->setGeometry(QRect(640, 40, 111, 25));
-        pushButton_2 = new QPushButton(groupBox_2);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(200, 40, 131, 25));
+        btnComprar = new QPushButton(grpResumenCarrito);
+        btnComprar->setObjectName(QString::fromUtf8("btnComprar"));
+        btnComprar->setGeometry(QRect(430, 40, 131, 25));
+        label = new QLabel(grpResumenCarrito);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(10, 44, 61, 17));
+        edtTxtTotal = new QLineEdit(grpResumenCarrito);
+        edtTxtTotal->setObjectName(QString::fromUtf8("edtTxtTotal"));
+        edtTxtTotal->setGeometry(QRect(100, 40, 191, 25));
+        edtTxtTotal->setReadOnly(true);
 
-        verticalLayout_3->addWidget(groupBox_2);
+        verticalLayout_3->addWidget(grpResumenCarrito);
 
         tabFrameGeneral->addTab(tabCarrito, QString());
         tabStock = new QWidget();
@@ -165,6 +177,11 @@ public:
         lblFiltro->setObjectName(QString::fromUtf8("lblFiltro"));
         lblFiltro->setGeometry(QRect(10, 34, 81, 17));
         cmbFiltro = new QComboBox(groupBox);
+        cmbFiltro->addItem(QString());
+        cmbFiltro->addItem(QString());
+        cmbFiltro->addItem(QString());
+        cmbFiltro->addItem(QString());
+        cmbFiltro->addItem(QString());
         cmbFiltro->addItem(QString());
         cmbFiltro->addItem(QString());
         cmbFiltro->addItem(QString());
@@ -185,8 +202,8 @@ public:
         tableView->setSelectionMode(QAbstractItemView::SingleSelection);
         tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
         tableView->setSortingEnabled(false);
-        tableView->horizontalHeader()->setCascadingSectionResizes(false);
-        tableView->horizontalHeader()->setDefaultSectionSize(200);
+        tableView->horizontalHeader()->setCascadingSectionResizes(true);
+        tableView->horizontalHeader()->setDefaultSectionSize(57);
         tableView->horizontalHeader()->setHighlightSections(false);
         tableView->horizontalHeader()->setProperty("showSortIndicator", QVariant(false));
         tableView->horizontalHeader()->setStretchLastSection(true);
@@ -272,16 +289,22 @@ public:
         btnEditar->setText(QApplication::translate("MainWindow", "Editar / Agregar", nullptr));
         btnStock->setText(QApplication::translate("MainWindow", "Stock", nullptr));
         lineEdit->setText(QApplication::translate("MainWindow", "ss", nullptr));
-        groupBox_2->setTitle(QApplication::translate("MainWindow", "GroupBox", nullptr));
+        grpResumenCarrito->setTitle(QApplication::translate("MainWindow", "Resumen del Carrito", nullptr));
         btnClearCarrito->setText(QApplication::translate("MainWindow", "Vaciar carrito", nullptr));
-        pushButton_2->setText(QApplication::translate("MainWindow", "Realizar compra", nullptr));
+        btnComprar->setText(QApplication::translate("MainWindow", "Realizar compra", nullptr));
+        label->setText(QApplication::translate("MainWindow", "TOTAL :", nullptr));
         tabFrameGeneral->setTabText(tabFrameGeneral->indexOf(tabCarrito), QApplication::translate("MainWindow", "Carrito", nullptr));
         groupBox->setTitle(QApplication::translate("MainWindow", "Filtro de busqueda", nullptr));
         btnUpdateTableStock->setText(QApplication::translate("MainWindow", "Buscar", nullptr));
         lblFiltro->setText(QApplication::translate("MainWindow", "Filtrar por:", nullptr));
-        cmbFiltro->setItemText(0, QApplication::translate("MainWindow", "item", nullptr));
-        cmbFiltro->setItemText(1, QApplication::translate("MainWindow", "cantidad", nullptr));
-        cmbFiltro->setItemText(2, QApplication::translate("MainWindow", "valor", nullptr));
+        cmbFiltro->setItemText(0, QApplication::translate("MainWindow", "Articulo", nullptr));
+        cmbFiltro->setItemText(1, QApplication::translate("MainWindow", "Litros", nullptr));
+        cmbFiltro->setItemText(2, QApplication::translate("MainWindow", "Color", nullptr));
+        cmbFiltro->setItemText(3, QApplication::translate("MainWindow", "Precio_fabrica", nullptr));
+        cmbFiltro->setItemText(4, QApplication::translate("MainWindow", "Costo", nullptr));
+        cmbFiltro->setItemText(5, QApplication::translate("MainWindow", "Precio_max", nullptr));
+        cmbFiltro->setItemText(6, QApplication::translate("MainWindow", "Ganancia", nullptr));
+        cmbFiltro->setItemText(7, QApplication::translate("MainWindow", "Descuento", nullptr));
 
         btnCleanFiltro->setText(QApplication::translate("MainWindow", "Limpiar filtro", nullptr));
         btnAddCarrito->setText(QApplication::translate("MainWindow", "agregar al carrito", nullptr));

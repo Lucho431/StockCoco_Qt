@@ -9,9 +9,16 @@ QT_END_NAMESPACE
 
 //User structs//
 typedef struct{
-    QString item;
+    QString art; //articulo
+    QString l; //litros
+    QString color;
     int cantStock;
     int cant;
+    float precio_f; //precio fabrica
+    float costo; //valor al que lo compran
+    float precio_max;
+    int gana; //ganancia
+    int desc; //descuento
     float val;
 }T_ITEM_STOCK;
 
@@ -42,6 +49,8 @@ private slots:
     void on_btnAddCarrito_clicked();
 
     void on_edtTxtCant_textChanged(const QString &arg1);
+
+    void on_btnClearCarrito_clicked();
 
 private:
     Ui::MainWindow *ui;
