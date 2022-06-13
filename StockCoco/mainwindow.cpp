@@ -175,6 +175,11 @@ void MainWindow::on_tableView_activated(const QModelIndex &index)
     ui->edtTxtItem->setText(itemSelecto.art + " " + itemSelecto.l + "lts. " + itemSelecto.color);
     ui->edtTxtCantStock->setText(QString::number(itemSelecto.cantStock));
     ui->edtTxtValor->setText(QString::number(itemSelecto.val));
+    ui->edtTxtDeFabrica->setText(QString::number(itemSelecto.precio_f));
+    ui->edtTxtDeVenta->setText(QString::number(itemSelecto.costo));
+    ui->edtTxtMaximo->setText(QString::number(itemSelecto.precio_max));
+    ui->edtTxtGanancia->setText(QString::number(itemSelecto.gana));
+    ui->edtTxtDescuento->setText(QString::number(itemSelecto.desc));
 
     //qDebug() << itemSelecto.item;
     //qDebug() << itemSelecto.cant;
@@ -194,7 +199,7 @@ void MainWindow::on_tabFrameGeneral_currentChanged(int index)
 
             valorCarrito = 0;
             while(query.next()){
-                valorCarrito += query.value(2).toInt() * query.value(3).toFloat();
+                valorCarrito += query.value(4).toInt() * query.value(6).toFloat();
             }
             ui->edtTxtTotal->setText(QString::number(valorCarrito));
 
@@ -244,7 +249,7 @@ void MainWindow::on_btnAddCarrito_clicked()
         consulta = "INSERT INTO carrito(Articulo,Litros,Color,Cantidad,Precio_fabrica,Costo,Precio_max,Ganancia,Descuento)VALUES('";
         consulta += itemSelecto.art + "', '" + itemSelecto.l + "', '" +
                     itemSelecto.color + "', " + QString::number(itemSelecto.cant) + ", " +
-                    QString::number(itemSelecto.precio_f) + ", " + QString::number(itemSelecto.costo) + ", " +
+                    QString::number(itemSelecto.precio_f) + ", " + QString::number(itemSelecto.val) + ", " +
                     QString::number(itemSelecto.precio_max) + ", " + QString::number(itemSelecto.gana) + ", " +
                     QString::number(itemSelecto.desc) + ")";
     }else{
@@ -252,7 +257,7 @@ void MainWindow::on_btnAddCarrito_clicked()
         consulta = "UPDATE carrito SET "; //item='"+ itemSelecto.item + "', ";
         consulta +="Cantidad='" + QString::number(itemSelecto.cant) + "', ";
         consulta +="Precio_fabrica='" + QString::number(itemSelecto.precio_f) + "', ";
-        consulta +="Costo='" + QString::number(itemSelecto.costo) + "', ";
+        consulta +="Costo='" + QString::number(itemSelecto.val) + "', ";
         consulta +="Precio_max='" + QString::number(itemSelecto.precio_max) + "', ";
         consulta +="Ganancia='" + QString::number(itemSelecto.gana) + "', ";
         consulta +="Descuento='" + QString::number(itemSelecto.desc) + "' WHERE Articulo='" + itemSelecto.art + "' AND ";

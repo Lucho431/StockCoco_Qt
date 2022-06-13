@@ -367,7 +367,7 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>83</height>
+            <height>205</height>
            </size>
           </property>
           <property name="frameShape">
@@ -379,8 +379,8 @@
           <widget class="QPushButton" name="btnAddCarrito">
            <property name="geometry">
             <rect>
-             <x>600</x>
-             <y>10</y>
+             <x>350</x>
+             <y>160</y>
              <width>131</width>
              <height>25</height>
             </rect>
@@ -392,8 +392,8 @@
           <widget class="QLabel" name="lblItem">
            <property name="geometry">
             <rect>
-             <x>139</x>
-             <y>10</y>
+             <x>50</x>
+             <y>24</y>
              <width>41</width>
              <height>17</height>
             </rect>
@@ -405,8 +405,8 @@
           <widget class="QLabel" name="lblValor">
            <property name="geometry">
             <rect>
-             <x>319</x>
-             <y>36</y>
+             <x>510</x>
+             <y>123</y>
              <width>71</width>
              <height>17</height>
             </rect>
@@ -418,8 +418,8 @@
           <widget class="QLabel" name="lblCantStock">
            <property name="geometry">
             <rect>
-             <x>50</x>
-             <y>36</y>
+             <x>447</x>
+             <y>24</y>
              <width>131</width>
              <height>17</height>
             </rect>
@@ -431,8 +431,8 @@
           <widget class="QLineEdit" name="edtTxtItem">
            <property name="geometry">
             <rect>
-             <x>190</x>
-             <y>3</y>
+             <x>100</x>
+             <y>20</y>
              <width>331</width>
              <height>25</height>
             </rect>
@@ -450,9 +450,9 @@
           <widget class="QLineEdit" name="edtTxtValor">
            <property name="geometry">
             <rect>
-             <x>392</x>
-             <y>30</y>
-             <width>129</width>
+             <x>583</x>
+             <y>120</y>
+             <width>91</width>
              <height>25</height>
             </rect>
            </property>
@@ -463,9 +463,9 @@
           <widget class="QLineEdit" name="edtTxtCantStock">
            <property name="geometry">
             <rect>
-             <x>190</x>
-             <y>30</y>
-             <width>121</width>
+             <x>583</x>
+             <y>20</y>
+             <width>91</width>
              <height>25</height>
             </rect>
            </property>
@@ -479,9 +479,9 @@
            </property>
            <property name="geometry">
             <rect>
-             <x>190</x>
-             <y>57</y>
-             <width>331</width>
+             <x>180</x>
+             <y>159</y>
+             <width>131</width>
              <height>25</height>
             </rect>
            </property>
@@ -489,8 +489,8 @@
           <widget class="QLabel" name="lblCant">
            <property name="geometry">
             <rect>
-             <x>35</x>
-             <y>60</y>
+             <x>24</x>
+             <y>161</y>
              <width>151</width>
              <height>20</height>
             </rect>
@@ -502,7 +502,7 @@
           <widget class="QLabel" name="lblAviso">
            <property name="geometry">
             <rect>
-             <x>550</x>
+             <x>540</x>
              <y>60</y>
              <width>251</width>
              <height>17</height>
@@ -510,6 +510,162 @@
            </property>
            <property name="text">
             <string/>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lblTituloPrecios">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>60</y>
+             <width>67</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>PRECIOS:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lblDeFabrica">
+           <property name="geometry">
+            <rect>
+             <x>70</x>
+             <y>95</y>
+             <width>101</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>De fábrica [$] : </string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lblDeVenta">
+           <property name="geometry">
+            <rect>
+             <x>292</x>
+             <y>95</y>
+             <width>91</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>De venta [$] :</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lblMaximo">
+           <property name="geometry">
+            <rect>
+             <x>492</x>
+             <y>95</y>
+             <width>91</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Máximo [$] :</string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="edtTxtDeFabrica">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>90</y>
+             <width>91</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="edtTxtMaximo">
+           <property name="geometry">
+            <rect>
+             <x>583</x>
+             <y>90</y>
+             <width>91</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="edtTxtDeVenta">
+           <property name="geometry">
+            <rect>
+             <x>390</x>
+             <y>90</y>
+             <width>91</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lblGanancia">
+           <property name="geometry">
+            <rect>
+             <x>74</x>
+             <y>123</y>
+             <width>101</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Ganancia [%] : </string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lblDesc">
+           <property name="geometry">
+            <rect>
+             <x>276</x>
+             <y>123</y>
+             <width>111</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Descuento [%] : </string>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="edtTxtGanancia">
+           <property name="geometry">
+            <rect>
+             <x>180</x>
+             <y>120</y>
+             <width>91</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QLineEdit" name="edtTxtDescuento">
+           <property name="geometry">
+            <rect>
+             <x>390</x>
+             <y>120</y>
+             <width>91</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="readOnly">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="btnEditarItem">
+           <property name="geometry">
+            <rect>
+             <x>500</x>
+             <y>160</y>
+             <width>111</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>editar ítem</string>
            </property>
           </widget>
          </widget>
@@ -520,19 +676,139 @@
        <attribute name="title">
         <string>Editar / Agregar</string>
        </attribute>
-       <widget class="QCheckBox" name="checkBox">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>200</y>
-          <width>92</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>CheckBox</string>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QGroupBox" name="grpBuscaEdit">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>64</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Filtro de busqueda</string>
+          </property>
+          <widget class="QPushButton" name="btnUpdateTableEditar">
+           <property name="geometry">
+            <rect>
+             <x>590</x>
+             <y>30</y>
+             <width>101</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Buscar</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lblFiltroEditar">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>34</y>
+             <width>81</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Filtrar por:</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="cmbFiltroEditar">
+           <property name="geometry">
+            <rect>
+             <x>100</x>
+             <y>30</y>
+             <width>86</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <item>
+            <property name="text">
+             <string>Articulo</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Litros</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Color</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Precio_fabrica</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Costo</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Precio_max</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Ganancia</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Descuento</string>
+            </property>
+           </item>
+          </widget>
+          <widget class="QLineEdit" name="edtTxtFiltroEditar">
+           <property name="geometry">
+            <rect>
+             <x>190</x>
+             <y>30</y>
+             <width>391</width>
+             <height>25</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="btnCleanFiltroEditar">
+           <property name="geometry">
+            <rect>
+             <x>700</x>
+             <y>30</y>
+             <width>101</width>
+             <height>25</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Limpiar filtro</string>
+           </property>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QFrame" name="frmEditarAtrib">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>200</height>
+           </size>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableView" name="tblEditar"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
