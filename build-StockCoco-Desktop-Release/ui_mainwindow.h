@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QGroupBox>
@@ -21,6 +22,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableView>
@@ -49,6 +51,7 @@ public:
     QPushButton *btnComprar;
     QLabel *label;
     QLineEdit *edtTxtTotal;
+    QCheckBox *chkDescuento;
     QWidget *tabStock;
     QVBoxLayout *verticalLayout_2;
     QGroupBox *groupBox;
@@ -90,6 +93,32 @@ public:
     QLineEdit *edtTxtFiltroEditar;
     QPushButton *btnCleanFiltroEditar;
     QFrame *frmEditarAtrib;
+    QLineEdit *edtTxtDescuentoEditar;
+    QPushButton *btnEliminar;
+    QLineEdit *edtTxtArt;
+    QLabel *lblLitros;
+    QLabel *lblTituloPreciosEditar;
+    QLabel *lblGananciaEditar;
+    QLineEdit *edtTxtLitros;
+    QLabel *lblColor;
+    QLabel *lblDeVentaEditar;
+    QLabel *lblValorEditar;
+    QLabel *lblDescEditar;
+    QLabel *lblMaximoEditar;
+    QLineEdit *edtTxtDeVentaEditar;
+    QLineEdit *edtTxtMaximoEditar;
+    QLineEdit *edtTxtColor;
+    QPushButton *btnGuardar;
+    QLineEdit *edtTxtDeFabricaEditar;
+    QLabel *lblArt;
+    QLineEdit *edtTxtValorEditar;
+    QLabel *lblAvisoEditar;
+    QLabel *lblDeFabricaEditar;
+    QLineEdit *edtTxtGananciaEditar;
+    QRadioButton *radEditar;
+    QRadioButton *radNuevo;
+    QLabel *lblCantStockEditar;
+    QLineEdit *edtTxtCantStockEditar;
     QTableView *tblEditar;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -164,20 +193,23 @@ public:
 
         grpResumenCarrito = new QGroupBox(tabCarrito);
         grpResumenCarrito->setObjectName(QString::fromUtf8("grpResumenCarrito"));
-        grpResumenCarrito->setMinimumSize(QSize(0, 76));
+        grpResumenCarrito->setMinimumSize(QSize(0, 90));
         btnClearCarrito = new QPushButton(grpResumenCarrito);
         btnClearCarrito->setObjectName(QString::fromUtf8("btnClearCarrito"));
-        btnClearCarrito->setGeometry(QRect(640, 40, 111, 25));
+        btnClearCarrito->setGeometry(QRect(640, 56, 111, 25));
         btnComprar = new QPushButton(grpResumenCarrito);
         btnComprar->setObjectName(QString::fromUtf8("btnComprar"));
-        btnComprar->setGeometry(QRect(430, 40, 131, 25));
+        btnComprar->setGeometry(QRect(399, 56, 131, 25));
         label = new QLabel(grpResumenCarrito);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(10, 44, 61, 17));
+        label->setGeometry(QRect(10, 60, 61, 17));
         edtTxtTotal = new QLineEdit(grpResumenCarrito);
         edtTxtTotal->setObjectName(QString::fromUtf8("edtTxtTotal"));
-        edtTxtTotal->setGeometry(QRect(100, 40, 191, 25));
+        edtTxtTotal->setGeometry(QRect(100, 56, 191, 25));
         edtTxtTotal->setReadOnly(true);
+        chkDescuento = new QCheckBox(grpResumenCarrito);
+        chkDescuento->setObjectName(QString::fromUtf8("chkDescuento"));
+        chkDescuento->setGeometry(QRect(10, 26, 141, 23));
 
         verticalLayout_3->addWidget(grpResumenCarrito);
 
@@ -238,7 +270,7 @@ public:
         frame->setFrameShadow(QFrame::Raised);
         btnAddCarrito = new QPushButton(frame);
         btnAddCarrito->setObjectName(QString::fromUtf8("btnAddCarrito"));
-        btnAddCarrito->setGeometry(QRect(350, 160, 131, 25));
+        btnAddCarrito->setGeometry(QRect(343, 160, 131, 25));
         lblItem = new QLabel(frame);
         lblItem->setObjectName(QString::fromUtf8("lblItem"));
         lblItem->setGeometry(QRect(50, 24, 41, 17));
@@ -311,7 +343,7 @@ public:
         edtTxtDescuento->setReadOnly(true);
         btnEditarItem = new QPushButton(frame);
         btnEditarItem->setObjectName(QString::fromUtf8("btnEditarItem"));
-        btnEditarItem->setGeometry(QRect(500, 160, 111, 25));
+        btnEditarItem->setGeometry(QRect(566, 160, 111, 25));
 
         verticalLayout_2->addWidget(frame);
 
@@ -351,14 +383,107 @@ public:
 
         frmEditarAtrib = new QFrame(tabEditar);
         frmEditarAtrib->setObjectName(QString::fromUtf8("frmEditarAtrib"));
-        frmEditarAtrib->setMinimumSize(QSize(0, 200));
+        frmEditarAtrib->setMinimumSize(QSize(0, 229));
         frmEditarAtrib->setFrameShape(QFrame::StyledPanel);
         frmEditarAtrib->setFrameShadow(QFrame::Raised);
+        edtTxtDescuentoEditar = new QLineEdit(frmEditarAtrib);
+        edtTxtDescuentoEditar->setObjectName(QString::fromUtf8("edtTxtDescuentoEditar"));
+        edtTxtDescuentoEditar->setGeometry(QRect(390, 147, 91, 25));
+        edtTxtDescuentoEditar->setReadOnly(false);
+        btnEliminar = new QPushButton(frmEditarAtrib);
+        btnEliminar->setObjectName(QString::fromUtf8("btnEliminar"));
+        btnEliminar->setGeometry(QRect(511, 187, 111, 25));
+        edtTxtArt = new QLineEdit(frmEditarAtrib);
+        edtTxtArt->setObjectName(QString::fromUtf8("edtTxtArt"));
+        edtTxtArt->setGeometry(QRect(100, 47, 141, 25));
+        edtTxtArt->setFrame(true);
+        edtTxtArt->setReadOnly(true);
+        lblLitros = new QLabel(frmEditarAtrib);
+        lblLitros->setObjectName(QString::fromUtf8("lblLitros"));
+        lblLitros->setGeometry(QRect(250, 47, 51, 20));
+        lblTituloPreciosEditar = new QLabel(frmEditarAtrib);
+        lblTituloPreciosEditar->setObjectName(QString::fromUtf8("lblTituloPreciosEditar"));
+        lblTituloPreciosEditar->setGeometry(QRect(20, 87, 67, 17));
+        lblGananciaEditar = new QLabel(frmEditarAtrib);
+        lblGananciaEditar->setObjectName(QString::fromUtf8("lblGananciaEditar"));
+        lblGananciaEditar->setGeometry(QRect(74, 150, 101, 17));
+        edtTxtLitros = new QLineEdit(frmEditarAtrib);
+        edtTxtLitros->setObjectName(QString::fromUtf8("edtTxtLitros"));
+        edtTxtLitros->setEnabled(true);
+        edtTxtLitros->setGeometry(QRect(300, 47, 71, 25));
+        edtTxtLitros->setReadOnly(true);
+        lblColor = new QLabel(frmEditarAtrib);
+        lblColor->setObjectName(QString::fromUtf8("lblColor"));
+        lblColor->setGeometry(QRect(385, 51, 51, 17));
+        lblDeVentaEditar = new QLabel(frmEditarAtrib);
+        lblDeVentaEditar->setObjectName(QString::fromUtf8("lblDeVentaEditar"));
+        lblDeVentaEditar->setGeometry(QRect(292, 122, 91, 17));
+        lblValorEditar = new QLabel(frmEditarAtrib);
+        lblValorEditar->setObjectName(QString::fromUtf8("lblValorEditar"));
+        lblValorEditar->setGeometry(QRect(510, 150, 71, 17));
+        lblDescEditar = new QLabel(frmEditarAtrib);
+        lblDescEditar->setObjectName(QString::fromUtf8("lblDescEditar"));
+        lblDescEditar->setGeometry(QRect(276, 150, 111, 17));
+        lblMaximoEditar = new QLabel(frmEditarAtrib);
+        lblMaximoEditar->setObjectName(QString::fromUtf8("lblMaximoEditar"));
+        lblMaximoEditar->setGeometry(QRect(492, 122, 91, 17));
+        edtTxtDeVentaEditar = new QLineEdit(frmEditarAtrib);
+        edtTxtDeVentaEditar->setObjectName(QString::fromUtf8("edtTxtDeVentaEditar"));
+        edtTxtDeVentaEditar->setGeometry(QRect(390, 117, 91, 25));
+        edtTxtDeVentaEditar->setReadOnly(false);
+        edtTxtMaximoEditar = new QLineEdit(frmEditarAtrib);
+        edtTxtMaximoEditar->setObjectName(QString::fromUtf8("edtTxtMaximoEditar"));
+        edtTxtMaximoEditar->setGeometry(QRect(583, 117, 91, 25));
+        edtTxtMaximoEditar->setReadOnly(false);
+        edtTxtColor = new QLineEdit(frmEditarAtrib);
+        edtTxtColor->setObjectName(QString::fromUtf8("edtTxtColor"));
+        edtTxtColor->setGeometry(QRect(436, 47, 71, 25));
+        edtTxtColor->setReadOnly(true);
+        btnGuardar = new QPushButton(frmEditarAtrib);
+        btnGuardar->setObjectName(QString::fromUtf8("btnGuardar"));
+        btnGuardar->setGeometry(QRect(137, 187, 131, 25));
+        edtTxtDeFabricaEditar = new QLineEdit(frmEditarAtrib);
+        edtTxtDeFabricaEditar->setObjectName(QString::fromUtf8("edtTxtDeFabricaEditar"));
+        edtTxtDeFabricaEditar->setGeometry(QRect(180, 117, 91, 25));
+        edtTxtDeFabricaEditar->setReadOnly(false);
+        lblArt = new QLabel(frmEditarAtrib);
+        lblArt->setObjectName(QString::fromUtf8("lblArt"));
+        lblArt->setGeometry(QRect(30, 51, 61, 20));
+        edtTxtValorEditar = new QLineEdit(frmEditarAtrib);
+        edtTxtValorEditar->setObjectName(QString::fromUtf8("edtTxtValorEditar"));
+        edtTxtValorEditar->setGeometry(QRect(583, 147, 91, 25));
+        edtTxtValorEditar->setReadOnly(false);
+        lblAvisoEditar = new QLabel(frmEditarAtrib);
+        lblAvisoEditar->setObjectName(QString::fromUtf8("lblAvisoEditar"));
+        lblAvisoEditar->setGeometry(QRect(540, 87, 251, 17));
+        lblDeFabricaEditar = new QLabel(frmEditarAtrib);
+        lblDeFabricaEditar->setObjectName(QString::fromUtf8("lblDeFabricaEditar"));
+        lblDeFabricaEditar->setGeometry(QRect(70, 122, 101, 17));
+        edtTxtGananciaEditar = new QLineEdit(frmEditarAtrib);
+        edtTxtGananciaEditar->setObjectName(QString::fromUtf8("edtTxtGananciaEditar"));
+        edtTxtGananciaEditar->setGeometry(QRect(180, 147, 91, 25));
+        edtTxtGananciaEditar->setReadOnly(false);
+        radEditar = new QRadioButton(frmEditarAtrib);
+        radEditar->setObjectName(QString::fromUtf8("radEditar"));
+        radEditar->setGeometry(QRect(30, 10, 131, 23));
+        radEditar->setChecked(true);
+        radNuevo = new QRadioButton(frmEditarAtrib);
+        radNuevo->setObjectName(QString::fromUtf8("radNuevo"));
+        radNuevo->setGeometry(QRect(190, 10, 131, 23));
+        lblCantStockEditar = new QLabel(frmEditarAtrib);
+        lblCantStockEditar->setObjectName(QString::fromUtf8("lblCantStockEditar"));
+        lblCantStockEditar->setGeometry(QRect(515, 52, 51, 17));
+        edtTxtCantStockEditar = new QLineEdit(frmEditarAtrib);
+        edtTxtCantStockEditar->setObjectName(QString::fromUtf8("edtTxtCantStockEditar"));
+        edtTxtCantStockEditar->setGeometry(QRect(570, 48, 91, 25));
+        edtTxtCantStockEditar->setReadOnly(false);
 
         verticalLayout_4->addWidget(frmEditarAtrib);
 
         tblEditar = new QTableView(tabEditar);
         tblEditar->setObjectName(QString::fromUtf8("tblEditar"));
+        tblEditar->setSelectionMode(QAbstractItemView::SingleSelection);
+        tblEditar->setSelectionBehavior(QAbstractItemView::SelectRows);
 
         verticalLayout_4->addWidget(tblEditar);
 
@@ -377,7 +502,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabFrameGeneral->setCurrentIndex(1);
+        tabFrameGeneral->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -394,6 +519,7 @@ public:
         btnClearCarrito->setText(QApplication::translate("MainWindow", "Vaciar carrito", nullptr));
         btnComprar->setText(QApplication::translate("MainWindow", "Realizar compra", nullptr));
         label->setText(QApplication::translate("MainWindow", "TOTAL :", nullptr));
+        chkDescuento->setText(QApplication::translate("MainWindow", "Aplica Descuento", nullptr));
         tabFrameGeneral->setTabText(tabFrameGeneral->indexOf(tabCarrito), QApplication::translate("MainWindow", "Carrito", nullptr));
         groupBox->setTitle(QApplication::translate("MainWindow", "Filtro de busqueda", nullptr));
         btnUpdateTableStock->setText(QApplication::translate("MainWindow", "Buscar", nullptr));
@@ -436,6 +562,23 @@ public:
         cmbFiltroEditar->setItemText(7, QApplication::translate("MainWindow", "Descuento", nullptr));
 
         btnCleanFiltroEditar->setText(QApplication::translate("MainWindow", "Limpiar filtro", nullptr));
+        btnEliminar->setText(QApplication::translate("MainWindow", "Eliminar", nullptr));
+        edtTxtArt->setText(QString());
+        lblLitros->setText(QApplication::translate("MainWindow", "Litros :", nullptr));
+        lblTituloPreciosEditar->setText(QApplication::translate("MainWindow", "PRECIOS:", nullptr));
+        lblGananciaEditar->setText(QApplication::translate("MainWindow", "Ganancia [%] : ", nullptr));
+        lblColor->setText(QApplication::translate("MainWindow", "Color :", nullptr));
+        lblDeVentaEditar->setText(QApplication::translate("MainWindow", "De venta [$] :", nullptr));
+        lblValorEditar->setText(QApplication::translate("MainWindow", "Valor [$] :", nullptr));
+        lblDescEditar->setText(QApplication::translate("MainWindow", "Descuento [%] : ", nullptr));
+        lblMaximoEditar->setText(QApplication::translate("MainWindow", "M\303\241ximo [$] :", nullptr));
+        btnGuardar->setText(QApplication::translate("MainWindow", "Guardar", nullptr));
+        lblArt->setText(QApplication::translate("MainWindow", "Art\303\255culo :", nullptr));
+        lblAvisoEditar->setText(QString());
+        lblDeFabricaEditar->setText(QApplication::translate("MainWindow", "De f\303\241brica [$] : ", nullptr));
+        radEditar->setText(QApplication::translate("MainWindow", "Editar Art\303\255culo", nullptr));
+        radNuevo->setText(QApplication::translate("MainWindow", "Nuevo Art\303\255culo", nullptr));
+        lblCantStockEditar->setText(QApplication::translate("MainWindow", "Stock :", nullptr));
         tabFrameGeneral->setTabText(tabFrameGeneral->indexOf(tabEditar), QApplication::translate("MainWindow", "Editar / Agregar", nullptr));
     } // retranslateUi
 

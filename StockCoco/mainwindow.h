@@ -52,6 +52,24 @@ private slots:
 
     void on_btnClearCarrito_clicked();
 
+    void on_radEditar_clicked();
+
+    void on_radNuevo_clicked();
+
+    void on_btnUpdateTableEditar_clicked();
+
+    void on_btnCleanFiltroEditar_clicked();
+
+    void on_tblEditar_activated(const QModelIndex &index);
+
+    void on_btnEditarItem_clicked();
+
+    void on_btnGuardar_clicked();
+
+    void on_btnEliminar_clicked();
+
+    void on_chkDescuento_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
