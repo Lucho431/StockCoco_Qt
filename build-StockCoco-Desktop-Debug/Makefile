@@ -14,10 +14,10 @@ EQ            = =
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../StockCoco -I. -I../../../../Qt5.12.11/5.12.11/gcc_64/include -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../StockCoco -I. -I../../../../Qt5.12.11/5.12.11/gcc_64/include -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtPrintSupport -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql -I../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/lucho/Qt5.12.11/5.12.11/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = StockCoco1.0.0
 DISTDIR = /home/lucho/Documentos/proyectosQt/StockCoco/build-StockCoco-Desktop-Debug/.tmp/StockCoco1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/lucho/Qt5.12.11/5.12.11/gcc_64/lib
-LIBS          = $(SUBLIBS) /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Widgets.so /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Gui.so /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Sql.so /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5PrintSupport.so /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Widgets.so /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Gui.so /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Sql.so /home/lucho/Qt5.12.11/5.12.11/gcc_64/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -53,9 +53,11 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../StockCoco/main.cpp \
-		../StockCoco/mainwindow.cpp moc_mainwindow.cpp
+		../StockCoco/mainwindow.cpp qrc_plantillaPDF.cpp \
+		moc_mainwindow.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
+		qrc_plantillaPDF.o \
 		moc_mainwindow.o
 DIST          = ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/common/unix.conf \
@@ -231,6 +233,7 @@ DIST          = ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/spec_pre.p
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/spec_post.prf \
+		../StockCoco/.qmake.stash \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/default_pre.prf \
@@ -437,6 +440,7 @@ Makefile: ../StockCoco/StockCoco.pro ../../../../Qt5.12.11/5.12.11/gcc_64/mkspec
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/default_pre.prf \
@@ -456,7 +460,8 @@ Makefile: ../StockCoco/StockCoco.pro ../../../../Qt5.12.11/5.12.11/gcc_64/mkspec
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/exceptions.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/yacc.prf \
 		../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/lex.prf \
-		../StockCoco/StockCoco.pro
+		../StockCoco/StockCoco.pro \
+		../StockCoco/plantillaPDF.qrc
 	$(QMAKE) -o Makefile ../StockCoco/StockCoco.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/spec_pre.prf:
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/common/unix.conf:
@@ -632,6 +637,7 @@ Makefile: ../StockCoco/StockCoco.pro ../../../../Qt5.12.11/5.12.11/gcc_64/mkspec
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/qt_config.prf:
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/toolchain.prf:
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/default_pre.prf:
@@ -652,6 +658,7 @@ Makefile: ../StockCoco/StockCoco.pro ../../../../Qt5.12.11/5.12.11/gcc_64/mkspec
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/yacc.prf:
 ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/lex.prf:
 ../StockCoco/StockCoco.pro:
+../StockCoco/plantillaPDF.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../StockCoco/StockCoco.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 
@@ -666,6 +673,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../StockCoco/plantillaPDF.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt5.12.11/5.12.11/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../StockCoco/mainwindow.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../StockCoco/main.cpp ../StockCoco/mainwindow.cpp $(DISTDIR)/
@@ -693,8 +701,14 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_plantillaPDF.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_plantillaPDF.cpp
+qrc_plantillaPDF.cpp: ../StockCoco/plantillaPDF.qrc \
+		../../../../Qt5.12.11/5.12.11/gcc_64/bin/rcc \
+		../StockCoco/imagenes/REMITO-R.png
+	/home/lucho/Qt5.12.11/5.12.11/gcc_64/bin/rcc -name plantillaPDF ../StockCoco/plantillaPDF.qrc -o qrc_plantillaPDF.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -813,7 +827,7 @@ moc_mainwindow.cpp: ../StockCoco/mainwindow.h \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qicon.h \
 		moc_predefs.h \
 		../../../../Qt5.12.11/5.12.11/gcc_64/bin/moc
-	/home/lucho/Qt5.12.11/5.12.11/gcc_64/bin/moc $(DEFINES) --include /home/lucho/Documentos/proyectosQt/StockCoco/build-StockCoco-Desktop-Debug/moc_predefs.h -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++ -I/home/lucho/Documentos/proyectosQt/StockCoco/StockCoco -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtWidgets -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtGui -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtSql -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../StockCoco/mainwindow.h -o moc_mainwindow.cpp
+	/home/lucho/Qt5.12.11/5.12.11/gcc_64/bin/moc $(DEFINES) --include /home/lucho/Documentos/proyectosQt/StockCoco/build-StockCoco-Desktop-Debug/moc_predefs.h -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/mkspecs/linux-g++ -I/home/lucho/Documentos/proyectosQt/StockCoco/StockCoco -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtPrintSupport -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtWidgets -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtGui -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtSql -I/home/lucho/Qt5.12.11/5.12.11/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../StockCoco/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -832,7 +846,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -1060,6 +1074,68 @@ mainwindow.o: ../StockCoco/mainwindow.cpp ../StockCoco/mainwindow.h \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qicon.h \
 		ui_mainwindow.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore/QVariant \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QApplication \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qapplication.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore/qeventloop.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qguiapplication.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qinputmethod.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QCheckBox \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qcheckbox.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qabstractbutton.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QComboBox \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qcombobox.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qvalidator.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore/qregularexpression.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qslider.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qstyle.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qframe.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QFrame \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QGroupBox \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qgroupbox.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QHBoxLayout \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qboxlayout.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qlayout.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qlayoutitem.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qgridlayout.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QHeaderView \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qheaderview.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QLabel \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qlabel.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QLineEdit \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qlineedit.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qtextcursor.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qtextformat.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qpen.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qtextoption.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QMenuBar \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qmenubar.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qmenu.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qaction.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QPushButton \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qpushbutton.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QRadioButton \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qradiobutton.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QStatusBar \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qstatusbar.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QTabWidget \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QTableView \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/qtableview.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QVBoxLayout \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtWidgets/QWidget \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/QSqlDatabase \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/qsqldatabase.h \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/qtsqlglobal.h \
@@ -1069,8 +1145,17 @@ mainwindow.o: ../StockCoco/mainwindow.cpp ../StockCoco/mainwindow.h \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/qsqlerror.h \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/QSqlQueryModel \
 		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtSql/qsqlquerymodel.h \
-		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtCore/qabstractitemmodel.h
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtPrintSupport/qprinter.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtPrintSupport/qtprintsupportglobal.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtPrintSupport/qtprintsupport-config.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qpagedpaintdevice.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qpagelayout.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qpagesize.h \
+		../../../../Qt5.12.11/5.12.11/gcc_64/include/QtGui/qpainter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../StockCoco/mainwindow.cpp
+
+qrc_plantillaPDF.o: qrc_plantillaPDF.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_plantillaPDF.o qrc_plantillaPDF.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

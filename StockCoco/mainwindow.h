@@ -70,6 +70,8 @@ private slots:
 
     void on_chkDescuento_clicked();
 
+    void on_btnComprar_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

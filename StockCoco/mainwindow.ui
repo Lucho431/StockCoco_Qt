@@ -118,7 +118,7 @@
         <item>
          <widget class="QLineEdit" name="lineEdit">
           <property name="text">
-           <string>ss</string>
+           <string/>
           </property>
          </widget>
         </item>

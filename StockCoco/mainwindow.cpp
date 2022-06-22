@@ -7,6 +7,11 @@
 #include <QtSql/QSqlQuery>
 #include <QtSql/qsqlerror.h>
 #include <QSqlQueryModel>
+//PDF includes
+#include <qprinter.h>
+#include <qpainter.h>
+#include <QtGui/qpagedpaintdevice.h>
+#include <qimage.h>
 
 
 //user variables//
@@ -23,8 +28,33 @@ float valorCarrito;
 uint8_t flag_descuento = 0;
 
 //PRIVATE FUNCTIONS//
-void refreshCarrito (void){
+int printPDF (void){
+    QPrinter printer;
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setResolution(7); //dpi
+    printer.setOutputFileName("nuevaCompra.pdf");
 
+    printer.setPageSize(QPagedPaintDevice::A4);
+    printer.setPrintRange(QPrinter::PageRange);
+    QPainter painter;
+    QImage fondoPDF(":/fondoPDF/imagenes/REMITO-R.png");
+
+
+    if (! painter.begin(&printer)) { // failed to open file
+        qWarning("failed to open file, is it writable?");
+        return -1;
+    }
+
+    painter.drawImage(0,0,fondoPDF);
+    painter.drawText(5, 20, "al borde 0,0... Esto está en +5 de X y +20 de Y");
+    if (! printer.newPage()) {
+        qWarning("failed in flushing page to disk, disk full?");
+        return -1;
+    }
+    painter.drawText(10, 10, "Se supone que es la página 2");
+    painter.end();
+
+    return 0;
 }
 
 
@@ -563,5 +593,11 @@ void MainWindow::on_chkDescuento_clicked()
     }
 
     MainWindow::on_tabFrameGeneral_currentChanged(0); //carrito
+}
+
+
+void MainWindow::on_btnComprar_clicked()
+{
+    printPDF();
 }
 

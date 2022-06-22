@@ -514,7 +514,7 @@ public:
         btnCarrito->setText(QApplication::translate("MainWindow", "Carrito", nullptr));
         btnEditar->setText(QApplication::translate("MainWindow", "Editar / Agregar", nullptr));
         btnStock->setText(QApplication::translate("MainWindow", "Stock", nullptr));
-        lineEdit->setText(QApplication::translate("MainWindow", "ss", nullptr));
+        lineEdit->setText(QString());
         grpResumenCarrito->setTitle(QApplication::translate("MainWindow", "Resumen del Carrito", nullptr));
         btnClearCarrito->setText(QApplication::translate("MainWindow", "Vaciar carrito", nullptr));
         btnComprar->setText(QApplication::translate("MainWindow", "Realizar compra", nullptr));
