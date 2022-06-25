@@ -26,12 +26,15 @@ uint8_t flag_itemSelecto = 0;
 //variables compra
 float valorCarrito;
 uint8_t flag_descuento = 0;
+T_ITEM_STOCK listaCompra[100];
+uint8_t tamanoCarrito = 0;
 
 //PRIVATE FUNCTIONS//
 int printPDF (void){
+
     QPrinter printer;
     printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setResolution(7); //dpi
+    printer.setResolution(190); //dpi; a prueba y error
     printer.setOutputFileName("nuevaCompra.pdf");
 
     printer.setPageSize(QPagedPaintDevice::A4);
@@ -46,7 +49,24 @@ int printPDF (void){
     }
 
     painter.drawImage(0,0,fondoPDF);
-    painter.drawText(5, 20, "al borde 0,0... Esto está en +5 de X y +20 de Y");
+    for (uint8_t i = 0; i < tamanoCarrito; i++){
+        painter.drawText(160, 920 + 50 * i, listaCompra[i].art + " " + listaCompra[i].l + "lts. " + listaCompra[i].color);
+        painter.drawText(560+130, 920 + 50 * i, QString::number(listaCompra[i].costo));
+        painter.drawText(880+100, 920 + 50 * i, QString::number(listaCompra[i].cant));
+        painter.drawText(1040+150, 920 + 50 * i, QString::number(listaCompra[i].cant * listaCompra[i].costo));
+    }
+
+    if (flag_descuento == 1){
+        painter.drawText(690, 920 + 700, QString::number(100 * valorCarrito / 90) + " + Desc. sobre el total");
+        painter.drawText(1085, 920 + 700, QString::number(valorCarrito) );
+    }else{
+        painter.drawText(690, 920 + 700, QString::number(valorCarrito) + " (SIN Desc.)");
+        painter.drawText(1085, 920 + 700, QString::number(valorCarrito));
+    }
+
+
+
+
     if (! printer.newPage()) {
         qWarning("failed in flushing page to disk, disk full?");
         return -1;
@@ -56,6 +76,56 @@ int printPDF (void){
 
     return 0;
 }
+
+
+int updateStockCant (void){
+    QSqlQuery query;
+    QString consulta;
+
+    uint8_t flagListo = 0;
+
+    while(flagListo != 1){
+
+        query.exec("SELECT * FROM carrito");
+        if (query.next()){
+            //ELIJO EL ITEM
+            itemSelecto.art = query.value(1).toString();
+            itemSelecto.l = query.value(2).toString();
+            itemSelecto.color = query.value(3).toString();
+            itemSelecto.cant = query.value(4).toInt();
+
+            //LO BUSCO EN EL STOCK
+            consulta = "SELECT * FROM stock WHERE Articulo='" + itemSelecto.art + "' AND ";
+            consulta += "Litros='" + itemSelecto.l + "' AND Color='" + itemSelecto.color + "'";
+            query.exec(consulta);
+            query.next();
+
+            //ACTUALIZO EL STOCK
+            consulta = "UPDATE stock SET ";
+            consulta +="Cantidad='" + QString::number(query.value(4).toInt() - itemSelecto.cant) + "' ";
+            //consulta +="Precio_fabrica='" + QString::number(itemSelecto.precio_f) + "', ";
+            //consulta +="Costo='" + QString::number(itemSelecto.costo) + "', ";
+            //consulta +="Precio_max='" + QString::number(itemSelecto.precio_max) + "', ";
+            //consulta +="Ganancia='" + QString::number(itemSelecto.gana) + "', ";
+            consulta +="WHERE Articulo='" + itemSelecto.art + "' AND ";
+            consulta +="Litros='" + itemSelecto.l + "' AND Color='" + itemSelecto.color + "';";
+
+            query.exec(consulta);
+            query.next();
+
+            //BORRO EL ITEM DEL CARRITO
+            QString consulta = "DELETE FROM carrito WHERE Articulo='" + itemSelecto.art + "' AND ";
+            consulta += "Litros='" + itemSelecto.l + "' AND Color='" + itemSelecto.color + "'";
+
+            query.exec(consulta);
+
+        }else{
+            flagListo = 1;
+        }
+
+    } //end while
+    return 0;
+} //end updateStockCant()
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -171,6 +241,8 @@ void MainWindow::on_btnCleanFiltro_clicked()
     ui->tableView->resizeColumnsToContents();
     ui->tableView->hideColumn(0);
     flag_itemSelecto = 0;
+    itemSelecto.cant = 0;
+    ui->edtTxtCant->setText("");
     ui->edtTxtCant->setDisabled(true);
 }
 
@@ -211,6 +283,8 @@ void MainWindow::on_tableView_activated(const QModelIndex &index)
     ui->edtTxtMaximo->setText(QString::number(itemSelecto.precio_max));
     ui->edtTxtGanancia->setText(QString::number(itemSelecto.gana));
     ui->edtTxtDescuento->setText(QString::number(itemSelecto.desc));
+
+    ui->edtTxtCant->setText("");
 
     //qDebug() << itemSelecto.item;
     //qDebug() << itemSelecto.cant;
@@ -598,6 +672,37 @@ void MainWindow::on_chkDescuento_clicked()
 
 void MainWindow::on_btnComprar_clicked()
 {
+    tamanoCarrito = ui->tblCarrito->model()->rowCount();
+
+    uint8_t i = 0;
+    QModelIndex indice;
+    while(i < tamanoCarrito){
+
+        indice = ui->tblCarrito->model()->index(i,1);
+        listaCompra[i].art = ui->tblCarrito->model()->data(indice).toString();
+        indice = ui->tblCarrito->model()->index(i,2);
+        listaCompra[i].l = ui->tblCarrito->model()->data(indice).toString();
+        indice = ui->tblCarrito->model()->index(i,3);
+        listaCompra[i].color = ui->tblCarrito->model()->data(indice).toString();
+        indice = ui->tblCarrito->model()->index(i,6);
+        listaCompra[i].costo = ui->tblCarrito->model()->data(indice).toFloat();
+        indice = ui->tblCarrito->model()->index(i,4);
+        listaCompra[i].cant = ui->tblCarrito->model()->data(indice).toInt();
+
+        //qDebug() << listaCompra[i].costo ;
+        i++;
+/*
+        if(flag_descuento == 1){
+            valorCarrito += query.value(4).toInt() * query.value(6).toFloat() * (1 - query.value(9).toFloat()/100);
+        }else{
+            valorCarrito += query.value(4).toInt() * query.value(6).toFloat();
+        }
+        */
+    }
+
     printPDF();
+    updateStockCant();
+    MainWindow::on_btnCleanFiltro_clicked();
+    MainWindow::on_tabFrameGeneral_currentChanged(0);
 }
 
